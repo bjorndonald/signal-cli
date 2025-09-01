@@ -6,12 +6,16 @@ LABEL org.opencontainers.image.licenses=GPL-3.0-only
 
 # Install required packages and create user
 RUN apt-get update && \
-    apt-get install -y unzip && \
+    apt-get install -y unzip curl && \
     rm -rf /var/lib/apt/lists/* && \
     useradd signal-cli --system --create-home --home-dir /var/lib/signal-cli
 
-# Add the signal-cli distribution
-ADD build/install/signal-cli /opt/signal-cli
+# Download and extract signal-cli directly in the container
+RUN cd /tmp && \
+    curl -L -o signal-cli.tar.gz https://github.com/AsamK/signal-cli/releases/download/v0.13.18/signal-cli-0.13.18.tar.gz && \
+    tar -xzf signal-cli.tar.gz && \
+    mv signal-cli-0.13.18 /opt/signal-cli && \
+    rm signal-cli.tar.gz
 
 # Extract native libraries from libsignal-client JAR
 RUN cd /opt/signal-cli/lib && \

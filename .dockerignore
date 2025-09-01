@@ -1,0 +1,26 @@
+# Git and version control
+.git
+.gitignore
+
+# Build artifacts (not needed since we download in container)
+build/
+.gradle/
+gradle/
+
+# Documentation
+README.md
+CHANGELOG.md
+LICENSE
+CONTRIBUTING.md
+FUNDING.yml
+RAILWAY_DEPLOYMENT.md
+
+# Development files
+run_tests.sh
+*.log
+*.tmp
+.DS_Store
+
+# Railway specific
+.railwayignore
+railway.json

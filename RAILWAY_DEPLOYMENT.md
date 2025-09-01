@@ -10,9 +10,10 @@ This guide explains how to deploy signal-cli on Railway with port 8085 exposed f
 
 ## Files Created
 
-- `Containerfile.railway` - Railway-optimized Docker container
+- `Containerfile.railway` - Railway-optimized Docker container (self-contained, downloads signal-cli)
 - `railway.json` - Railway service configuration
 - `.railwayignore` - Files to exclude from deployment
+- `.dockerignore` - Docker build context exclusions
 - `RAILWAY_DEPLOYMENT.md` - This guide
 
 ## Deployment Steps
@@ -20,12 +21,14 @@ This guide explains how to deploy signal-cli on Railway with port 8085 exposed f
 ### 1. Build the Railway Image Locally (Optional)
 
 ```bash
-# Build the Railway-specific image
+# Build the Railway-specific image (self-contained, no external dependencies)
 docker build --no-cache --platform linux/amd64 -f Containerfile.railway -t signal-cli-railway .
 
 # Test locally
 docker run --platform linux/amd64 -p 8085:8085 -v ~/signal-cli-config:/var/lib/signal-cli signal-cli-railway
 ```
+
+**Note**: The improved Containerfile downloads signal-cli directly from GitHub releases, so it doesn't depend on local build files. This makes it more reliable for Railway deployments.
 
 ### 2. Deploy to Railway
 
