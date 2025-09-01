@@ -1,0 +1,17 @@
+# Exclude build artifacts and temporary files
+build/
+.gradle/
+gradle/
+gradlew
+gradlew.bat
+*.log
+*.tmp
+.DS_Store
+.git/
+.gitignore
+README.md
+CHANGELOG.md
+LICENSE
+CONTRIBUTING.md
+FUNDING.yml
+run_tests.sh
